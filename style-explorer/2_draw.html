@@ -4,8 +4,38 @@
 html,body { margin:0; background:white; font-family:Arial,Helvetica,sans-serif; }
 #wrap { position:relative; width:1600px; height:1100px; }
 canvas { position:absolute; left:0; top:0; }
+  #styleDetails {
+    margin-top: 20px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+#styleDetails h1 {
+    font-size: 32px;
+    font-weight: normal;
+    margin: 0 0 15px 0;
+}
+
+.style-detail {
+    margin-bottom: 14px;
+}
+
+.style-detail-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.style-detail-range {
+    font-size: 16px;
+}
 </style></head><body>
-<div id="wrap"><canvas id="myCanvas" width="1600" height="1100"></canvas><canvas id="titleCanvas" width="1600" height="200"></canvas></div>
+<div id="wrap">
+  <canvas id="myCanvas" width="1600" height="1100"></canvas>
+</div>
+
+<div id="styleDetails"></div>
 <script>
 const styles = {
   "1A": {
@@ -2228,17 +2258,32 @@ function render() {
   const unknown=ids.filter(id=>!styles[id]);
   if(!chosen.length) { dtx.font='38px Arial'; dtx.fillText('Unknown style: '+ids.join(', '),10,50); return; }
 
-  dtx.font='36px Arial'; dtx.fillText(chosen.length===1 ? styleLabel(chosen[0]) : `Comparing ${chosen.length} BJCP styles`,10,45);
-  dtx.font='17px Arial';
+const details = document.getElementById('styleDetails');
 
-  const colWidth=520, rowHeight=42, startY=76;
-  chosen.forEach((s,i)=>{
-    if(s.ibu && s.srm && s.abv) drawBeer(s,i);
-    const col=Math.floor(i/3), row=i%3;
-    const x=10+col*colWidth, y=startY+row*rowHeight;
-    dtx.font='bold 16px Arial'; dtx.fillText(`${i+1}. ${styleLabel(s)}`,x,y);
-    dtx.font='14px Arial'; dtx.fillText(rangeText(s),x,y+18);
-  });
+details.innerHTML =
+    `<h1>${
+        chosen.length === 1
+            ? styleLabel(chosen[0])
+            : `Comparing ${chosen.length} BJCP styles`
+    }</h1>`;
+
+chosen.forEach((s, i) => {
+
+    if (s.ibu && s.srm && s.abv) {
+        drawBeer(s, i);
+    }
+
+    details.innerHTML += `
+        <div class="style-detail">
+            <div class="style-detail-name">
+                ${i + 1}. ${styleLabel(s)}
+            </div>
+            <div class="style-detail-range">
+                ${rangeText(s)}
+            </div>
+        </div>
+    `;
+});
 
   if(unknown.length) {
     dtx.font='14px Arial'; dtx.fillText('Unknown style IDs: '+unknown.join(', '),10,192);
