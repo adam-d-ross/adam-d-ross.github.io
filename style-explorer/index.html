@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BJCP 2021 Style Explorer</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; font-family: Arial, Helvetica, sans-serif; }
+.layout { display:grid; grid-template-columns: 420px 1fr; min-height:100vh; }
+.stylenav { height:100vh; overflow:auto; padding:12px; background:#fafafa; border-right:1px solid #ddd; }
+.collapsible { background:#777; color:#fff; cursor:pointer; padding:14px 16px; width:100%; border:0; text-align:left; font-size:15px; margin-top:2px; }
+.collapsible:hover,.collapsible.active { background:#555; }
+.collapsible::after { content:'+'; float:right; font-weight:bold; }
+.collapsible.active::after { content:'−'; }
+.content { display:none; padding:8px 12px 10px; background:#f1f1f1; line-height:1.65; white-space:normal; }
+.content.open { display:block; }
+.content a { color:#0645ad; text-decoration:none; display:inline-block; padding:2px 5px; border-radius:4px; }
+.content a:hover { text-decoration:underline; }
+.content a.selected { background:#dcecff; color:#003a75; font-weight:bold; text-decoration:none; }
+.comparebar { position:sticky; top:0; z-index:5; background:#fff; border:1px solid #ddd; border-radius:6px; padding:9px 10px; margin-bottom:10px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+.comparebar strong { display:block; margin-bottom:4px; }
+.comparebar .hint { font-size:12px; color:#666; line-height:1.35; }
+#clearComparison { margin-top:7px; padding:5px 9px; border:1px solid #aaa; border-radius:4px; background:#f7f7f7; cursor:pointer; }
+#clearComparison:disabled { opacity:.5; cursor:default; }
+.viewer { overflow:auto; }
+#frame { border:0; width:1600px; height:1100px; transform:scale(.75); transform-origin:0 0; }
+@media (max-width:850px) { .layout { grid-template-columns:1fr; } .stylenav { height:auto; max-height:45vh; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="stylenav">
+<div class="comparebar"><strong>Compare styles</strong><div class="hint">Click a style to select it. Click more styles to overlay them; click a selected style again to remove it.</div><button id="clearComparison" type="button" disabled>Clear comparison</button></div>
+<button type="button" class="collapsible">1 - Standard American Beer</button>
+<div class="content"><a href="2_draw.html?style=1A" target="frame">1A. American Light Lager</a><br>
+<a href="2_draw.html?style=1B" target="frame">1B. American Lager</a><br>
+<a href="2_draw.html?style=1C" target="frame">1C. Cream Ale</a><br>
+<a href="2_draw.html?style=1D" target="frame">1D. American Wheat Beer</a></div>
+<button type="button" class="collapsible">2 - International Lager</button>
+<div class="content"><a href="2_draw.html?style=2A" target="frame">2A. International Pale Lager</a><br>
+<a href="2_draw.html?style=2B" target="frame">2B. International Amber Lager</a><br>
+<a href="2_draw.html?style=2C" target="frame">2C. International Dark Lager</a></div>
+<button type="button" class="collapsible">3 - Czech Lager</button>
+<div class="content"><a href="2_draw.html?style=3A" target="frame">3A. Czech Pale Lager</a><br>
+<a href="2_draw.html?style=3B" target="frame">3B. Czech Premium Pale Lager</a><br>
+<a href="2_draw.html?style=3C" target="frame">3C. Czech Amber Lager</a><br>
+<a href="2_draw.html?style=3D" target="frame">3D. Czech Dark Lager</a></div>
+<button type="button" class="collapsible">4 - Pale Malty European Lager</button>
+<div class="content"><a href="2_draw.html?style=4A" target="frame">4A. Munich Helles</a><br>
+<a href="2_draw.html?style=4B" target="frame">4B. Festbier</a><br>
+<a href="2_draw.html?style=4C" target="frame">4C. Helles Bock</a></div>
+<button type="button" class="collapsible">5 - Pale Bitter European Beer</button>
+<div class="content"><a href="2_draw.html?style=5A" target="frame">5A. German Leichtbier</a><br>
+<a href="2_draw.html?style=5B" target="frame">5B. Kölsch</a><br>
+<a href="2_draw.html?style=5C" target="frame">5C. German Helles Exportbier</a><br>
+<a href="2_draw.html?style=5D" target="frame">5D. German Pils</a></div>
+<button type="button" class="collapsible">6 - Amber Malty European Lager</button>
+<div class="content"><a href="2_draw.html?style=6A" target="frame">6A. Märzen</a><br>
+<a href="2_draw.html?style=6B" target="frame">6B. Rauchbier</a><br>
+<a href="2_draw.html?style=6C" target="frame">6C. Dunkles Bock</a></div>
+<button type="button" class="collapsible">7 - Amber Bitter European Beer</button>
+<div class="content"><a href="2_draw.html?style=7A" target="frame">7A. Vienna Lager</a><br>
+<a href="2_draw.html?style=7B" target="frame">7B. Altbier</a></div>
+<button type="button" class="collapsible">8 - Dark European Lager</button>
+<div class="content"><a href="2_draw.html?style=8A" target="frame">8A. Munich Dunkel</a><br>
+<a href="2_draw.html?style=8B" target="frame">8B. Schwarzbier</a></div>
+<button type="button" class="collapsible">9 - Strong European Beer</button>
+<div class="content"><a href="2_draw.html?style=9A" target="frame">9A. Doppelbock</a><br>
+<a href="2_draw.html?style=9B" target="frame">9B. Eisbock</a><br>
+<a href="2_draw.html?style=9C" target="frame">9C. Baltic Porter</a></div>
+<button type="button" class="collapsible">10 - German Wheat Beer</button>
+<div class="content"><a href="2_draw.html?style=10A" target="frame">10A. Weissbier</a><br>
+<a href="2_draw.html?style=10B" target="frame">10B. Dunkles Weissbier</a><br>
+<a href="2_draw.html?style=10C" target="frame">10C. Weizenbock</a></div>
+<button type="button" class="collapsible">11 - British Bitter</button>
+<div class="content"><a href="2_draw.html?style=11A" target="frame">11A. Ordinary Bitter</a><br>
+<a href="2_draw.html?style=11B" target="frame">11B. Best Bitter</a><br>
+<a href="2_draw.html?style=11C" target="frame">11C. Strong Bitter</a></div>
+<button type="button" class="collapsible">12 - Pale Commonwealth Beer</button>
+<div class="content"><a href="2_draw.html?style=12A" target="frame">12A. British Golden Ale</a><br>
+<a href="2_draw.html?style=12B" target="frame">12B. Australian Sparkling Ale</a><br>
+<a href="2_draw.html?style=12C" target="frame">12C. English IPA</a></div>
+<button type="button" class="collapsible">13 - Brown British Beer</button>
+<div class="content"><a href="2_draw.html?style=13A" target="frame">13A. Dark Mild</a><br>
+<a href="2_draw.html?style=13B" target="frame">13B. British Brown Ale</a><br>
+<a href="2_draw.html?style=13C" target="frame">13C. English Porter</a></div>
+<button type="button" class="collapsible">14 - Scottish Ale</button>
+<div class="content"><a href="2_draw.html?style=14A" target="frame">14A. Scottish Light</a><br>
+<a href="2_draw.html?style=14B" target="frame">14B. Scottish Heavy</a><br>
+<a href="2_draw.html?style=14C" target="frame">14C. Scottish Export</a></div>
+<button type="button" class="collapsible">15 - Irish Beer</button>
+<div class="content"><a href="2_draw.html?style=15A" target="frame">15A. Irish Red Ale</a><br>
+<a href="2_draw.html?style=15B" target="frame">15B. Irish Stout</a><br>
+<a href="2_draw.html?style=15C" target="frame">15C. Irish Extra Stout</a></div>
+<button type="button" class="collapsible">16 - Dark British Beer</button>
+<div class="content"><a href="2_draw.html?style=16A" target="frame">16A. Sweet Stout</a><br>
+<a href="2_draw.html?style=16B" target="frame">16B. Oatmeal Stout</a><br>
+<a href="2_draw.html?style=16C" target="frame">16C. Tropical Stout</a><br>
+<a href="2_draw.html?style=16D" target="frame">16D. Foreign Extra Stout</a></div>
+<button type="button" class="collapsible">17 - Strong British Ale</button>
+<div class="content"><a href="2_draw.html?style=17A" target="frame">17A. British Strong Ale</a><br>
+<a href="2_draw.html?style=17B" target="frame">17B. Old Ale</a><br>
+<a href="2_draw.html?style=17C" target="frame">17C. Wee Heavy</a><br>
+<a href="2_draw.html?style=17D" target="frame">17D. English Barley Wine</a></div>
+<button type="button" class="collapsible">18 - Pale American Ale</button>
+<div class="content"><a href="2_draw.html?style=18A" target="frame">18A. Blonde Ale</a><br>
+<a href="2_draw.html?style=18B" target="frame">18B. American Pale Ale</a></div>
+<button type="button" class="collapsible">19 - Amber and Brown American Beer</button>
+<div class="content"><a href="2_draw.html?style=19A" target="frame">19A. American Amber Ale</a><br>
+<a href="2_draw.html?style=19B" target="frame">19B. California Common</a><br>
+<a href="2_draw.html?style=19C" target="frame">19C. American Brown Ale</a></div>
+<button type="button" class="collapsible">20 - American Porter and Stout</button>
+<div class="content"><a href="2_draw.html?style=20A" target="frame">20A. American Porter</a><br>
+<a href="2_draw.html?style=20B" target="frame">20B. American Stout</a><br>
+<a href="2_draw.html?style=20C" target="frame">20C. Imperial Stout</a></div>
+<button type="button" class="collapsible">21 - IPA</button>
+<div class="content"><a href="2_draw.html?style=21A" target="frame">21A. American IPA</a><br>
+<a href="2_draw.html?style=21B1" target="frame">21B. Specialty IPA: Belgian IPA</a><br>
+<a href="2_draw.html?style=21B2" target="frame">21B. Specialty IPA: Black IPA</a><br>
+<a href="2_draw.html?style=21B3" target="frame">21B. Specialty IPA: Brown IPA</a><br>
+<a href="2_draw.html?style=21B4" target="frame">21B. Specialty IPA: Red IPA</a><br>
+<a href="2_draw.html?style=21B5" target="frame">21B. Specialty IPA: Rye IPA</a><br>
+<a href="2_draw.html?style=21B6" target="frame">21B. Specialty IPA: White IPA</a><br>
+<a href="2_draw.html?style=21B7" target="frame">21B. Specialty IPA: Brut IPA</a><br>
+<a href="2_draw.html?style=21C" target="frame">21C. Hazy IPA</a></div>
+<button type="button" class="collapsible">22 - Strong American Ale</button>
+<div class="content"><a href="2_draw.html?style=22A" target="frame">22A. Double IPA</a><br>
+<a href="2_draw.html?style=22B" target="frame">22B. American Strong Ale</a><br>
+<a href="2_draw.html?style=22C" target="frame">22C. American Barleywine</a><br>
+<a href="2_draw.html?style=22D" target="frame">22D. Wheatwine</a></div>
+<button type="button" class="collapsible">23 - European Sour Ale</button>
+<div class="content"><a href="2_draw.html?style=23A" target="frame">23A. Berliner Weisse</a><br>
+<a href="2_draw.html?style=23B" target="frame">23B. Flanders Red Ale</a><br>
+<a href="2_draw.html?style=23C" target="frame">23C. Oud Bruin</a><br>
+<a href="2_draw.html?style=23D" target="frame">23D. Lambic</a><br>
+<a href="2_draw.html?style=23E" target="frame">23E. Gueuze</a><br>
+<a href="2_draw.html?style=23F" target="frame">23F. Fruit Lambic</a><br>
+<a href="2_draw.html?style=23G" target="frame">23G. Gose</a></div>
+<button type="button" class="collapsible">24 - Belgian Ale</button>
+<div class="content"><a href="2_draw.html?style=24A" target="frame">24A. Witbier</a><br>
+<a href="2_draw.html?style=24B" target="frame">24B. Belgian Pale Ale</a><br>
+<a href="2_draw.html?style=24C" target="frame">24C. Bière de Garde</a></div>
+<button type="button" class="collapsible">25 - Strong Belgian Ale</button>
+<div class="content"><a href="2_draw.html?style=25A" target="frame">25A. Belgian Blond Ale</a><br>
+<a href="2_draw.html?style=25B" target="frame">25B. Saison</a><br>
+<a href="2_draw.html?style=25C" target="frame">25C. Belgian Golden Strong Ale</a></div>
+<button type="button" class="collapsible">26 - Monastic Ale</button>
+<div class="content"><a href="2_draw.html?style=26A" target="frame">26A. Belgian Single</a><br>
+<a href="2_draw.html?style=26B" target="frame">26B. Belgian Dubbel</a><br>
+<a href="2_draw.html?style=26C" target="frame">26C. Belgian Tripel</a><br>
+<a href="2_draw.html?style=26D" target="frame">26D. Belgian Dark Strong Ale</a></div>
+<button type="button" class="collapsible">27 - Historical Beer</button>
+<div class="content"><a href="2_draw.html?style=27A" target="frame">27. Historical Beer: Kellerbier</a><br>
+<a href="2_draw.html?style=27B" target="frame">27. Historical Beer: Kentucky Common</a><br>
+<a href="2_draw.html?style=27C" target="frame">27. Historical Beer: Lichtenhainer</a><br>
+<a href="2_draw.html?style=27D" target="frame">27. Historical Beer: London Brown Ale</a><br>
+<a href="2_draw.html?style=27E" target="frame">27. Historical Beer: Piwo Grodziskie</a><br>
+<a href="2_draw.html?style=27F" target="frame">27. Historical Beer: Pre-Prohibition Lager</a><br>
+<a href="2_draw.html?style=27G" target="frame">27. Historical Beer: Pre-Prohibition Porter</a><br>
+<a href="2_draw.html?style=27H" target="frame">27. Historical Beer: Roggenbier</a><br>
+<a href="2_draw.html?style=27I" target="frame">27. Historical Beer: Sahti</a></div>
+<button type="button" class="collapsible">28 - American Wild Ale</button>
+<div class="content"><a href="2_draw.html?style=28A" target="frame">28A. Brett Beer</a><br>
+<a href="2_draw.html?style=28B" target="frame">28B. Mixed-Fermentation Sour Beer</a><br>
+<a href="2_draw.html?style=28C" target="frame">28C. Wild Specialty Beer</a><br>
+<a href="2_draw.html?style=28D" target="frame">28D. Straight Sour Beer</a></div>
+<button type="button" class="collapsible">29 - Fruit Beer</button>
+<div class="content"><a href="2_draw.html?style=29A" target="frame">29A. Fruit Beer</a><br>
+<a href="2_draw.html?style=29B" target="frame">29B. Fruit and Spice Beer</a><br>
+<a href="2_draw.html?style=29C" target="frame">29C. Specialty Fruit Beer</a><br>
+<a href="2_draw.html?style=29D" target="frame">29D. Grape Ale</a></div>
+<button type="button" class="collapsible">30 - Spiced Beer</button>
+<div class="content"><a href="2_draw.html?style=30A" target="frame">30A. Spice, Herb, or Vegetable Beer</a><br>
+<a href="2_draw.html?style=30B" target="frame">30B. Autumn Seasonal Beer</a><br>
+<a href="2_draw.html?style=30C" target="frame">30C. Winter Seasonal Beer</a><br>
+<a href="2_draw.html?style=30D" target="frame">30D. Specialty Spice Beer</a></div>
+<button type="button" class="collapsible">31 - Alternative Fermentables Beer</button>
+<div class="content"><a href="2_draw.html?style=31A" target="frame">31A. Alternative Grain Beer</a><br>
+<a href="2_draw.html?style=31B" target="frame">31B. Alternative Sugar Beer</a></div>
+<button type="button" class="collapsible">32 - Smoked Beer</button>
+<div class="content"><a href="2_draw.html?style=32A" target="frame">32A. Classic Style Smoked Beer</a><br>
+<a href="2_draw.html?style=32B" target="frame">32B. Specialty Smoked Beer</a></div>
+<button type="button" class="collapsible">33 - Wood Beer</button>
+<div class="content"><a href="2_draw.html?style=33A" target="frame">33A. Wood-Aged Beer</a><br>
+<a href="2_draw.html?style=33B" target="frame">33B. Specialty Wood-Aged Beer</a></div>
+<button type="button" class="collapsible">34 - Specialty Beer</button>
+<div class="content"><a href="2_draw.html?style=34A" target="frame">34A. Commercial Specialty Beer</a><br>
+<a href="2_draw.html?style=34B" target="frame">34B. Mixed-Style Beer</a><br>
+<a href="2_draw.html?style=34C" target="frame">34C. Experimental Beer</a></div>
+</nav>
+<main class="viewer"><iframe id="frame" name="frame" src="2_draw.html" title="Style graph"></iframe></main>
+</div>
+<script>
+document.querySelectorAll('.collapsible').forEach(btn => btn.addEventListener('click', () => {
+  btn.classList.toggle('active');
+  btn.nextElementSibling.classList.toggle('open');
+}));
+
+const selectedStyles = new Set();
+const frame = document.getElementById('frame');
+const clearButton = document.getElementById('clearComparison');
+const styleLinks = [...document.querySelectorAll('.content a[href*="style="]')];
+
+function styleIdFromLink(link) {
+  return new URL(link.href, location.href).searchParams.get('style');
+}
+
+function updateComparison() {
+  styleLinks.forEach(link => link.classList.toggle('selected', selectedStyles.has(styleIdFromLink(link))));
+  clearButton.disabled = selectedStyles.size === 0;
+  if (selectedStyles.size === 0) {
+    frame.src = '2_draw.html';
+    return;
+  }
+  const ids = [...selectedStyles];
+  frame.src = '2_draw.html?style=' + encodeURIComponent(ids.join('+'));
+}
+
+styleLinks.forEach(link => link.addEventListener('click', event => {
+  event.preventDefault();
+  const id = styleIdFromLink(link);
+  if (event.ctrlKey || event.metaKey || event.shiftKey) {
+    // Modifier-click always adds/removes without resetting, useful for familiar desktop behavior.
+    selectedStyles.has(id) ? selectedStyles.delete(id) : selectedStyles.add(id);
+  } else if (selectedStyles.size === 1 && selectedStyles.has(id)) {
+    selectedStyles.delete(id);
+  } else if (selectedStyles.size === 0 || selectedStyles.has(id)) {
+    selectedStyles.has(id) ? selectedStyles.delete(id) : selectedStyles.add(id);
+  } else {
+    // Plain clicks accumulate comparisons by design.
+    selectedStyles.add(id);
+  }
+  updateComparison();
+}));
+
+clearButton.addEventListener('click', () => {
+  selectedStyles.clear();
+  updateComparison();
+});
+</script>
+</body></html>
