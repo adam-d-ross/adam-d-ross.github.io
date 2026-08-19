@@ -24,7 +24,7 @@ body { margin:0; font-family: Arial, Helvetica, sans-serif; }
 #clearComparison { margin-top:7px; padding:5px 9px; border:1px solid #aaa; border-radius:4px; background:#f7f7f7; cursor:pointer; }
 #clearComparison:disabled { opacity:.5; cursor:default; }
 .viewer { overflow:auto; }
-#frame { border:0; width:1600px; height:1100px; transform:scale(.75); transform-origin:0 0; }
+#frame { border:0; width:1600px; height:1200px; transform:scale(.75); transform-origin:0 0; }
 @media (max-width:850px) { .layout { grid-template-columns:1fr; } .stylenav { height:auto; max-height:45vh; } }
 </style>
 </head>
@@ -201,6 +201,13 @@ const selectedStyles = new Set();
 const frame = document.getElementById('frame');
 const clearButton = document.getElementById('clearComparison');
 const styleLinks = [...document.querySelectorAll('.content a[href*="style="]')];
+
+window.addEventListener('message', event => {
+  if (event.source !== frame.contentWindow) return;
+  if (!event.data || event.data.type !== 'styleExplorerHeight') return;
+  const height = Number(event.data.height);
+  if (Number.isFinite(height) && height > 0) frame.style.height = Math.ceil(height + 20) + 'px';
+});
 
 function styleIdFromLink(link) {
   return new URL(link.href, location.href).searchParams.get('style');
